@@ -1,0 +1,56 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: verity-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - DEBUG=${DEBUG:-false}
+      - BACKEND_HOST=0.0.0.0
+      - BACKEND_PORT=8000
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-qwen2.5:1.5b}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL:-all-MiniLM-L6-v2}
+      - SQLITE_DB_PATH=/app/data/sqlite/verity.db
+      - FAISS_INDEX_PATH=/app/data/faiss/index.faiss
+      - UPLOAD_DIR=/app/data/uploads
+      - QUARANTINE_DIR=/app/data/quarantine
+      - CORS_ORIGINS=${CORS_ORIGINS:-["http://localhost:5173","http://127.0.0.1:5173","http://localhost:80","http://localhost"]}
+      - ADMIN_API_KEY=${ADMIN_API_KEY:-verity-admin-secret-key}
+      - AUDITOR_API_KEY=${AUDITOR_API_KEY:-verity-auditor-secret-key}
+      - USER_API_KEY=${USER_API_KEY:-verity-user-secret-key}
+    volumes:
+      - ./data/sqlite:/app/data/sqlite
+      - ./data/faiss:/app/data/faiss
+      - ./data/uploads:/app/data/uploads
+      - ./data/quarantine:/app/data/quarantine
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: verity-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 15s
+      timeout: 3s
+      retries: 3

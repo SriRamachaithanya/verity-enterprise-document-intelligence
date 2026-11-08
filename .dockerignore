@@ -1,0 +1,45 @@
+# Version control & git
+.git
+.gitignore
+
+# Python virtual environment & bytecode
+.venv
+venv/
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Test & coverage artifacts
+.pytest_cache
+.ruff_cache
+.coverage
+htmlcov/
+*.log
+
+# Frontend source & dependencies (handled by frontend Dockerfile)
+frontend/node_modules
+frontend/dist
+
+# IDE & OS files
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+# Secrets & environment files (prevent accidental secret baking)
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# Persistent storage directories (mounted via volumes)
+data/sqlite/*.db
+data/sqlite/*.db-wal
+data/sqlite/*.db-shm
+data/faiss/*.faiss
+data/faiss/*.index
+data/uploads/*
+data/quarantine/*
+

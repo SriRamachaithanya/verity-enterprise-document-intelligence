@@ -1,0 +1,55 @@
+{
+  "hardware": {
+    "cpu": "11th Gen Intel(R) Core(TM) i5-11400F @ 2.60GHz (6C/12T)",
+    "ram_total_gb": 7.84,
+    "ram_available_gb": 1.42
+  },
+  "metrics": {
+    "startup_time_ms": 1662.73,
+    "post_startup_rss_mb": 472.21,
+    "frontend": {
+      "raw_js_size": "863.8 KB",
+      "gzip_js_size": "253.2 KB",
+      "raw_css_size": "42.7 KB",
+      "gzip_css_size": "7.9 KB"
+    },
+    "document_ingestion": {
+      "total_time_ms": 2388.09,
+      "chunks_count": 4,
+      "ms_per_chunk": 597.02,
+      "file_size_bytes": 4640
+    },
+    "search_latency": {
+      "p50_ms": 22.21,
+      "p95_ms": 25.86,
+      "avg_ms": 22.89
+    },
+    "llm_assistant": {
+      "chat_total_latency_ms": 12221.5,
+      "time_to_first_token_ms": 11672.01
+    },
+    "api_endpoint_latencies": {
+      "GET /health": 4.35,
+      "GET /ready": 1530.51,
+      "GET /api/v1/documents": 5.9,
+      "POST /api/v1/compliance/evaluate": 82.54,
+      "POST /api/v1/compliance/gap-analysis": 83.98,
+      "GET /api/v1/knowledge/logical-access-control": 8.49
+    },
+    "concurrency_5": {
+      "success_rate": "5/5",
+      "total_duration_sec": 0.07,
+      "requests_per_second": 69.84
+    },
+    "concurrency_10": {
+      "success_rate": "10/10",
+      "total_duration_sec": 0.12,
+      "requests_per_second": 80.84
+    },
+    "peak_memory": {
+      "initial_rss_mb": 469.62,
+      "peak_rss_mb": 608.12,
+      "net_increase_mb": 138.5
+    }
+  }
+}

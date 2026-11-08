@@ -1,0 +1,36 @@
+[project]
+name = "verity-backend"
+version = "0.1.0"
+description = "Verity – Enterprise Document Intelligence & Compliance Agent"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.6.0",
+    "python-dotenv>=1.0.1",
+    "mcp>=1.0.0",
+    "fastmcp>=0.4.0",
+    "pymupdf>=1.24.11",
+    "python-docx>=1.1.2",
+    "sentence-transformers>=3.3.0",
+    "faiss-cpu>=1.9.0",
+    "numpy>=1.26.0,<2.1.0",
+    "ollama>=0.4.0",
+    "httpx>=0.27.2",
+    "pytest>=8.3.3",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.7.3",
+    "coverage>=7.6.4",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
